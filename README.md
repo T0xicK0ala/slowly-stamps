@@ -1,8 +1,8 @@
 # slowly-stamps
 
-###### Slowly app stamp collection. Please visit http://slowlystamps.info.
+###### Slowly app stamp collection. Please visit [my website](http://slowlystamps.info).
 
-###### Data source is https://slowly.fandom.com/wiki/List_of_stamps_on_Slowly
+###### Data source is [here](https://slowly.fandom.com/wiki/List_of_stamps_on_Slowly).
 
 ### Road Map
 
@@ -13,6 +13,7 @@
 - key feature: search function (tba)
 - other feature: sorting by column (tba)
 - other feature: filtering by some columns (tba)
+- other feature: SSL connection (when rich)
 
 ### Page History
 
