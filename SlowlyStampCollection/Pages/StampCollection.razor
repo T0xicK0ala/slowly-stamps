@@ -3,7 +3,7 @@
 @using SlowlyStampCollection.Data
 @inject StampCollectionService StampService
 
-<h1>Slowly Stamp Collection</h1>
+<h1>Slowly Stamp Collection</h1><hr>
 
 <p>All the information you want and need to know about collecting stamps on Slowly app.</p>
 
@@ -22,12 +22,13 @@ else
         <thead>
             <tr>
                 <th>Image</th>
+                <th>Price</th>
+                <th>Region</th>
+                <th>Category</th>
+                <th>Availability</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Category</th>
                 <th>Difficulty</th>
-                <th>Price</th>
-                <th>How to get it?</th>
             </tr>
         </thead>
         <tbody>
@@ -39,12 +40,13 @@ else
                         <img src="@stamp.Url" alt="@stamp.StampName" />
                     </a>
                 </td>
-                <td>@stamp.Title</td>
-                <td>@stamp.Desc</td>
-                <td>@stamp.CategoryName</td>
-                <td><p style="color:@stamp.DifficultyCode">@stamp.DifficultyName</p></td>
                 <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.Price</td>
-                <td>@stamp.Method</td>
+                <td>@stamp.Region</td>
+                <td>@stamp.CategoryName</td>
+                <td style="width:15%">@stamp.Availability</td>
+                <td style="width:15%">@stamp.Title</td>
+                <td style="width:20%">@stamp.Desc</td>
+                <td><p style="color:@stamp.DifficultyCode">@stamp.DifficultyName</p></td>
             </tr>
             }
         </tbody>

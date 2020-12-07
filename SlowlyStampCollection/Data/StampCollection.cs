@@ -22,7 +22,8 @@ namespace SlowlyStampCollection.Data
         public string StampName { get { return Slug + @".png"; } }
         public string Title { get; set; }
         public string Desc { get; set; }
-        public string Method { get; set; }
+        public string Availability { get; set; }
+        public string Region { get; set; }
         public int Category { get; set; }
         public string CategoryName { get { return Categories[Category]; } }
         public int Difficulty { get; set; }
