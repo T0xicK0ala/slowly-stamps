@@ -17,16 +17,14 @@
 ### Page History
 
 - version 0.2 07/12/2020 Minor updates
-
-* Added Acknowledgement page
-* Updated favicon to match Slowly app style
-* Updated home page, added history of the page and links
-* Replaced About link on the top right corner to version number
-* Updated nav menu
-* Removed Column "How to get it?"
-* Added new Columns "Availability" and "Region"
-* Changed site name
-* Fixed some UI and style issues
-
+    - Added Acknowledgement page
+    - Updated favicon to match Slowly app style
+    - Updated home page, added history of the page and links
+    - Replaced About link on the top right corner to version number
+    - Updated nav menu
+    - Removed Column "How to get it?"
+    - Added new Columns "Availability" and "Region"
+    - Changed site name
+    - Fixed some UI and style issues
 - version 0.1 07/12/2020 Website is online
 
