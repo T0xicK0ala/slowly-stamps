@@ -14,7 +14,7 @@
 }
 else
 {
-<table class="table">
+<div>
     <p>
         Total: <strong>@stamps.Length</strong> stamps
         <ul>
@@ -28,7 +28,8 @@ else
                 <strong>@stamps.Count(s => s.Category == 2)</strong> stamps in category Stamp Set
             </li>
             <li>
-                <strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive
+                @*<strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive*@
+                <strong>@stamps.Count(s => s.Region != "global")</strong> stamps in category Location Exclusive
             </li>
             <li>
                 <strong>@stamps.Count(s => s.Category == 5)</strong> stamps in category Time Machine
@@ -38,9 +39,10 @@ else
             </li>
         </ul>
     </p>
-    <input type="text" name="search" value="" placeholder="search your stamp here" />
+    Search: <input type="text" name="search" value="" />
+</div>
+<table class="table">
 </table>
-
 <table class="table">
     <thead>
         <tr>
@@ -74,7 +76,7 @@ else
             }
     </tbody>
 </table>
-}
+    }
 
 @code {
     private Stamp[] stamps;
