@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 using System.Text.Json;
+using System.Text.Unicode;
+using System.Text.Encodings.Web;
 using System.IO;
 using System.Collections.Generic;
 
@@ -14,9 +17,12 @@ namespace SlowlyStampCollection.Data
             var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
             };
 
-            return Task.FromResult(JsonSerializer.Deserialize<Stamp[]>(File.ReadAllText(@"Data\stamps.json"), options).ToArray());
+            // Encoding not working
+            var json = File.ReadAllText(@"Data\stamps.json", Encoding.UTF8);
+            return Task.FromResult(JsonSerializer.Deserialize<Stamp[]>(json, options).ToArray());
         }
     }
 }

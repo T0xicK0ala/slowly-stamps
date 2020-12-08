@@ -5,17 +5,32 @@ namespace SlowlyStampCollection.Data
     {
         private static readonly string[] Colors = new[]
         {
-            "gray", "black", "green", "blue", "purple", "red"
+            "gray", 
+            "black", 
+            "green", 
+            "blue", 
+            "purple", 
+            "red"
         };
 
         private static readonly string[] Difficulties = new[]
         {
-            "Very Easy", "Easy", "Normal", "Hard", "Very Hard", "Impossible"
+            "Very Easy",  //0
+            "Easy",  //1
+            "Normal",  //2
+            "Hard",  //3
+            "Very Hard",  //4 
+            "Impossible"  //5
         };
 
         private static readonly string[] Categories = new[]
         {
-            "Other", "Single Stamp", "Stamp Set", "Location Exclusive", "Achievements"
+            "Other",  //0
+            "Single Stamp",  //1
+            "Stamp Set",  //2
+            "Location Exclusive",  //3
+            "Achievements",  //4
+            "Time Machine"  //5
         };
         public string Slug { get; set; }
         public string Url { get { return @"https://cdn.getslowly.com/assets/images/stamp-sm/" + Slug + @".png"; } }

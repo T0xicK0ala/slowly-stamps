@@ -21,7 +21,8 @@
 ### Page History
 
 - Version 0.2.1 Minor updates (08/12/2020)
-	- Added Achievements stamps
+	- Added 62 Achievements stamps
+	- Added 47 Time Machine stamps
 	- Added stamp counts on stamp collection page
 	- Added features
 	- Updated roadmap
