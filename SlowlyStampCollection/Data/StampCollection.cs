@@ -15,7 +15,7 @@ namespace SlowlyStampCollection.Data
 
         private static readonly string[] Categories = new[]
         {
-            "Other", "Single Stamp", "Stamp Set", "Location Exclusive"
+            "Other", "Single Stamp", "Stamp Set", "Location Exclusive", "Achievements"
         };
         public string Slug { get; set; }
         public string Url { get { return @"https://cdn.getslowly.com/assets/images/stamp-sm/" + Slug + @".png"; } }

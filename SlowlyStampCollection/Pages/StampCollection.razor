@@ -3,9 +3,10 @@
 @using SlowlyStampCollection.Data
 @inject StampCollectionService StampService
 
-<h1>Slowly Stamp Collection</h1><hr>
+<h1>SLOWLY Stamp Collection</h1>
+<hr>
 
-<p>All the information you want and need to know about collecting stamps on Slowly app.</p>
+<p>All the information you want and need to know about collecting stamps on SLOWLY app.</p>
 
 @if (stamps == null)
 {
@@ -14,7 +15,26 @@
 else
 {
     <table class="table">
-        <p>Total: <strong>@stamps.Length</strong> stamps</p>
+        <p>
+            Total: <strong>@stamps.Length</strong> stamps
+            <ul>
+                <li>
+                    <strong>@stamps.Count(s => s.Category == 4)</strong> stamps in category Achievements
+                </li>
+                <li>
+                    <strong>@stamps.Count(s => s.Category == 1)</strong> stamps in category Single Stamp
+                </li>
+                <li>
+                    <strong>@stamps.Count(s => s.Category == 2)</strong> stamps in category Stamp Set
+                </li>
+                <li>
+                    <strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive
+                </li>
+                <li>
+                    <strong>@stamps.Count(s => s.Category == 0)</strong> stamp in category Other
+                </li>
+            </ul>
+        </p>
         <input type="text" name="search" value="" placeholder="search your stamp here" />
     </table>
 
@@ -28,26 +48,26 @@ else
                 <th>Availability</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Difficulty</th>
+                <th>Difficulty*</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var stamp in stamps)
             {
-            <tr>
-                <td>
-                    <a href="javascript:;" title="@stamp.Slug">
-                        <img src="@stamp.Url" alt="@stamp.StampName" />
-                    </a>
-                </td>
-                <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.Price</td>
-                <td>@stamp.Region</td>
-                <td>@stamp.CategoryName</td>
-                <td style="width:15%">@stamp.Availability</td>
-                <td style="width:15%">@stamp.Title</td>
-                <td style="width:20%">@stamp.Desc</td>
-                <td><p style="color:@stamp.DifficultyCode">@stamp.DifficultyName</p></td>
-            </tr>
+                <tr>
+                    <td>
+                        <a href="javascript:;" title="@stamp.Slug">
+                            <img src="@stamp.Url" alt="@stamp.StampName" />
+                        </a>
+                    </td>
+                    <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.Price</td>
+                    <td>@stamp.Region</td>
+                    <td>@stamp.CategoryName</td>
+                    <td style="width:15%">@stamp.Availability</td>
+                    <td style="width:15%">@stamp.Title</td>
+                    <td style="width:20%">@stamp.Desc</td>
+                    <td><p style="color:@stamp.DifficultyCode">@stamp.DifficultyName</p></td>
+                </tr>
             }
         </tbody>
     </table>
