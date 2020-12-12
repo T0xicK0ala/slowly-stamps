@@ -17,12 +17,9 @@ namespace SlowlyStampCollection.Data
             var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
             };
 
-            // Encoding not working
-            var json = File.ReadAllText(@"Data\stamps.json", Encoding.UTF8);
-            return Task.FromResult(JsonSerializer.Deserialize<Stamp[]>(json, options).ToArray());
+            return Task.FromResult(JsonSerializer.Deserialize<Stamp[]>(File.ReadAllText(@"Data\stamps.json"), options).ToArray());
         }
     }
 }
