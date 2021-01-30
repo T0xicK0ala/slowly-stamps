@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace SlowlyStampCollection.Data
 {
     public class Stamp
@@ -39,5 +41,52 @@ namespace SlowlyStampCollection.Data
         public string DifficultyName { get { return Difficulties[Difficulty, 0]; } }
         public int Price { get; set; }
         public string Region { get; set; }
+    }
+
+    public class Item 
+    {
+        private static readonly string BaseUrl = @"https://cdn.getslowly.com/assets/images/stamp-sm/";
+        private static readonly string FileExtension = @".png";
+        public string Url { get { return string.Format("{0}{1}{2}", BaseUrl, slug, FileExtension); } }
+        public int id { get; set; }
+        public string slug { get; set; }
+        public string name { get; set; }
+        public string credit { get; set; }
+        public string type { get; set; }
+        
+        
+        public string rarity { get; set; }
+        public string price { get; set; }
+        public string desc { get; set; }
+        public string img { get; set; }
+        
+        public string country { get; set; }
+
+        
+    }
+
+    public class Lang
+    {
+        public int id { get; set; }
+        public string slug { get; set; }
+        public string name { get; set; }
+        public string native { get; set; }
+        public int? count { get; set; }
+    }
+    public class Tag
+    {
+        public int id { get; set; }
+        public string slug { get; set; }
+        public string name { get; set; }
+        public int suggest { get; set; }
+    }
+    public class SlowlyData
+    {
+        public int ver { get; set; }
+        public List<Lang> Langs { get; set; }
+        public List<Item> Items { get; set; }
+        public List<Tag> Tags { get; set; }
+        public int? sharequota { get; set; }
+        public int? sharequotareset { get; set; }
     }
 }

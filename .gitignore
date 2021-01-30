@@ -343,4 +343,3 @@ healthchecksdb
 stamps.json
 appsettings.*
 Properties/
-*.csproj

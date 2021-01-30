@@ -1,10 +1,10 @@
-﻿@page "/stampcollection"
+﻿@page "/stampcollectionstatic"
 
 @using SlowlyStampCollection.Data
 @using System.Linq
 @inject StampCollectionService StampService
 
-<h1>SLOWLY Stamp Collection</h1>
+<h1>SLOWLY Stamp Collection (Offline)</h1>
 <hr>
 
 <p>All the information you want and need to know about collecting stamps on SLOWLY app.</p>
@@ -19,7 +19,7 @@ else
         <p>
             Total: <strong>@stamps.Length</strong> stamps
             <ul>
-                <!--<li>
+                <li>
                     <strong>@stamps.Count(s => s.Category == 4)</strong> stamps in category Achievements
                 </li>
                 <li>
@@ -28,18 +28,17 @@ else
                 <li>
                     <strong>@stamps.Count(s => s.Category == 2)</strong> stamps in category Stamp Set
                 </li>
-                <li>-->
-                @*<strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive*@
-                <!--<strong>@stamps.Count(s => s.Region != "global")</strong> stamps in category Location Exclusive
+                <li>
+                    @*<strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive*@
+                    <strong>@stamps.Count(s => s.Region != "global")</strong> stamps in category Location Exclusive
                 </li>
                 <li>
                     <strong>@stamps.Count(s => s.Category == 5)</strong> stamps in category Time Machine
                 </li>
                 <li>
                     <strong>@stamps.Count(s => s.Category == 0)</strong> stamps in category Other
-                </li>-->
+                </li>
             </ul>
-
             @*Second paragraph
                 <ul>
                     @for (int i = 0; i < 6; i++)
@@ -76,7 +75,7 @@ else
                 <th>Availability</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Rarity</th>
+                <th>Difficulty*</th>
             </tr>
         </thead>
         <tbody>
@@ -84,17 +83,17 @@ else
             {
                 <tr>
                     <td>
-                        <a href="javascript:;" title="@stamp.slug">
-                            <img src="@stamp.Url" alt="@stamp.name" />
+                        <a href="javascript:;" title="@stamp.Slug">
+                            <img src="@stamp.Url" alt="@stamp.StampName" />
                         </a>
                     </td>
-                    <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.price</td>
-                    <td></td>
-                    <td></td>
-                    <td style="width:15%">@stamp.credit</td>
-                    <td style="width:15%">@stamp.name</td>
-                    <td style="width:20%">@stamp.desc</td>
-                    <td><p style="color:red">@stamp.rarity</p></td>
+                    <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.Price</td>
+                    <td>@stamp.Region</td>
+                    <td>@stamp.CategoryName</td>
+                    <td style="width:15%">@stamp.Availability</td>
+                    <td style="width:15%">@stamp.Title</td>
+                    <td style="width:20%">@stamp.Desc</td>
+                    <td><p style="color:@stamp.DifficultyColor">@stamp.DifficultyName</p></td>
                 </tr>
             }
         </tbody>
@@ -102,10 +101,10 @@ else
 }
 
 @code {
-    private SlowlyStampCollection.Data.Item[] stamps;
+    private Stamp[] stamps;
 
     protected override async Task OnInitializedAsync()
     {
-        stamps = await StampService.GetSlowlyDataAsync();
+        stamps = await StampService.GetStampAsync();
     }
 }
