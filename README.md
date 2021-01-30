@@ -1,7 +1,5 @@
 # slowly-stamps
 
-##### The website will be back online 1st Feb.
-
 ###### Slowly app stamp collection. Please visit [my website](http://slowlystamps.info).
 
 ###### Data source is [here](https://slowly.fandom.com/wiki/List_of_stamps_on_Slowly).
