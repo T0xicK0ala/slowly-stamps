@@ -8,6 +8,7 @@
 <hr>
 
 <p>All the information you want and need to know about collecting stamps on SLOWLY app.</p>
+<p>Sorted by stamp release date.</p>
 
 @if (stamps == null)
 {
@@ -88,7 +89,7 @@ else
                             <img src="@stamp.Url" alt="@stamp.name" />
                         </a>
                     </td>
-                    <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.price</td>
+                    <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
                     <td></td>
                     <td></td>
                     <td style="width:15%">@stamp.credit</td>
@@ -106,6 +107,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        stamps = await StampService.GetSlowlyDataAsync();
+        stamps = await StampService.GetStampAsync();
     }
 }

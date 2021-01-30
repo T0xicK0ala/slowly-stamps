@@ -340,6 +340,6 @@ ASALocalRun/
 healthchecksdb
 
 # Custom
-stamps.json
+Slowly/
 appsettings.*
 Properties/

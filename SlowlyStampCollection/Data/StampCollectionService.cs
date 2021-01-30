@@ -16,35 +16,35 @@ namespace SlowlyStampCollection.Data
 {
     public class StampCollectionService
     {
-        public Task<Stamp[]> GetStampAsync()
-        {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
+        private readonly string uri = @"https://api.getslowly.com/slowly";
 
-            return Task.FromResult(JsonSerializer.Deserialize<Stamp[]>(File.ReadAllText(@"Data\stamps.json"), options).ToArray());
-        }
-        public Task<Item[]> GetSlowlyDataAsync()
+        public Task<Item[]> GetStampAsync()
         {
             var options = new JsonSerializerOptions
             {
-                //Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
+            using WebClient client = new WebClient();
+            var json = client.DownloadString(uri);
+            var deserielizedJson = JsonSerializer.Deserialize<SlowlyData>(json, options);
+            var jsonVersion = deserielizedJson.ver.ToString();
+            _ = GenerateData(jsonVersion, json);
+            return Task.FromResult(deserielizedJson.Items.OrderByDescending(i => i.id).ToArray());
+        }
 
-            using WebClient wc = new WebClient();
-
-            var json = wc.DownloadString("https://api.getslowly.com/slowly");
-
-            var abc = Task.FromResult(JsonSerializer.Deserialize<SlowlyData>(json, options).Items.ToArray());
-            
-
-            
-            return abc;
-            //return Task.FromResult(JsonSerializer.Deserialize<SlowlyData[]>(, options).ToArray());
+        private static async Task GenerateData(string ver, string json)
+        {
+            string url = string.Format(@"Slowly\json{0}.json", ver);
+            try
+            {
+                await File.WriteAllTextAsync(url, json);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

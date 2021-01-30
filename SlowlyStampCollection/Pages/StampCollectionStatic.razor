@@ -18,7 +18,7 @@ else
     <div>
         <p>
             Total: <strong>@stamps.Length</strong> stamps
-            <ul>
+            <!--<ul>
                 <li>
                     <strong>@stamps.Count(s => s.Category == 4)</strong> stamps in category Achievements
                 </li>
@@ -28,9 +28,9 @@ else
                 <li>
                     <strong>@stamps.Count(s => s.Category == 2)</strong> stamps in category Stamp Set
                 </li>
-                <li>
+                <li>-->
                     @*<strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive*@
-                    <strong>@stamps.Count(s => s.Region != "global")</strong> stamps in category Location Exclusive
+                    <!--<strong>@stamps.Count(s => s.Region != "global")</strong> stamps in category Location Exclusive
                 </li>
                 <li>
                     <strong>@stamps.Count(s => s.Category == 5)</strong> stamps in category Time Machine
@@ -38,7 +38,7 @@ else
                 <li>
                     <strong>@stamps.Count(s => s.Category == 0)</strong> stamps in category Other
                 </li>
-            </ul>
+            </ul>-->
             @*Second paragraph
                 <ul>
                     @for (int i = 0; i < 6; i++)
@@ -78,7 +78,7 @@ else
                 <th>Difficulty*</th>
             </tr>
         </thead>
-        <tbody>
+        @*<tbody>
             @foreach (var stamp in stamps)
             {
                 <tr>
@@ -96,12 +96,12 @@ else
                     <td><p style="color:@stamp.DifficultyColor">@stamp.DifficultyName</p></td>
                 </tr>
             }
-        </tbody>
+        </tbody>*@
     </table>
 }
 
 @code {
-    private Stamp[] stamps;
+    private SlowlyStampCollection.Data.Item[] stamps;
 
     protected override async Task OnInitializedAsync()
     {

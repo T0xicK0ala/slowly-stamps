@@ -1,5 +1,52 @@
-﻿<h3>SlowlyStampRelease</h3>
+﻿@page "/slowlystamprelease"
+
+@using SlowlyStampCollection.Data
+@using System.Linq
+@inject StampCollectionService StampService
+
+<h1>Slowly Stamp Release</h1>
+<hr>
+
+<p>Working in progress.</p>
+@if (stamps == null)
+{
+    <p><em>Getting there...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Stamp</th>
+
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            
+
+            @foreach (var stamp in abc)
+            {
+                <tr>
+                    @*<td style="width:15%">@stamp.ToString()</td>*@
+                   
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    
+}
 
 @code {
+    private SlowlyStampCollection.Data.Item[] stamps;
+    private Array abc;
 
+    protected override async Task OnInitializedAsync()
+    {
+        stamps = await StampService.GetStampAsync();
+        //abc = stamps.Where(s => s.item_set != null).GroupBy(stamp => stamp.item_set.updated_at).Select(stamp => stamp.Key).ToArray();
+    }
 }

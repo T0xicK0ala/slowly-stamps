@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace SlowlyStampCollection.Data
@@ -45,6 +46,17 @@ namespace SlowlyStampCollection.Data
 
     public class Item 
     {
+        public int PriceCal()
+        {
+            if (Convert.ToInt32(price) == -1)
+                return 0;
+            if (Convert.ToInt32(price) == 2)
+                return 50;
+            else
+                return 100;
+        }
+
+
         private static readonly string BaseUrl = @"https://cdn.getslowly.com/assets/images/stamp-sm/";
         private static readonly string FileExtension = @".png";
         public string Url { get { return string.Format("{0}{1}{2}", BaseUrl, slug, FileExtension); } }
@@ -57,14 +69,21 @@ namespace SlowlyStampCollection.Data
         
         public string rarity { get; set; }
         public string price { get; set; }
+
+        
         public string desc { get; set; }
         public string img { get; set; }
         
         public string country { get; set; }
+        public ItemSet item_set { get; set; }
 
-        
     }
+    public class ItemSet
+    {
+        public int? id { get; set; }
+        public string updated_at { get; set; }
 
+    }
     public class Lang
     {
         public int id { get; set; }
