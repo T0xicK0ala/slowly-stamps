@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Net.Http.Json;
 using System.Text.Unicode;
 using System.Text.Encodings.Web;
 using System.IO;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net;
 
 namespace SlowlyStampCollection.Data
@@ -35,18 +30,25 @@ namespace SlowlyStampCollection.Data
 
         private static SlowlyData DeserielizeSlowlyData()
         {
-            var options = new JsonSerializerOptions
+            try
             {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                };
 
-            using WebClient client = new WebClient();
-            var jsonStr = client.DownloadString(uri);
-            var deserielizedJson = JsonSerializer.Deserialize<SlowlyData>(jsonStr, options);
-            var jsonVersion = deserielizedJson.Ver.ToString();
-            _ = GenerateData(jsonVersion, jsonStr);
-            return deserielizedJson;
+                using WebClient client = new WebClient();
+                var jsonStr = client.DownloadString(uri);
+                var deserielizedJson = JsonSerializer.Deserialize<SlowlyData>(jsonStr, options);
+                var jsonVersion = deserielizedJson.Ver.ToString();
+                _ = GenerateData(jsonVersion, jsonStr);
+                return deserielizedJson;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<Item[]> GetStampAsync()
@@ -56,18 +58,7 @@ namespace SlowlyStampCollection.Data
 
         public Task<Lang[]> GetLanguageAsync()
         {
-            try
-            {
-                return Task.FromResult(DeserielizeSlowlyData().Lang.OrderByDescending(l => l.Count).ToArray());
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            
-            
-            
+            return Task.FromResult(DeserielizeSlowlyData().Lang.OrderByDescending(l => l.Count).ToArray());
         }
     }
 }

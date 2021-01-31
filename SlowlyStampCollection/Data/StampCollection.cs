@@ -26,40 +26,79 @@ namespace SlowlyStampCollection.Data
 
     public class Item
     {
-        public int PriceCal()
+        #region Customised fields
+        public string PriceCal()
         {
-            if (Convert.ToInt32(Price) == -1)
-                return 0;
-            if (Convert.ToInt32(Price) == 2)
-                return 50;
+            if (Convert.ToInt32(Price) == -1) // free
+                return "0";
+            if (Convert.ToInt32(Price) == 0) // cannot buy
+                return "n/a";
+            if (Convert.ToInt32(Price) == 1) // set
+                return "100";
+            if (Convert.ToInt32(Price) == 2) { // other
+                if (Item_set == null)
+                    return "50";
+                else
+                    return Item_set.Price.ToString();
+            }
             else
-                return 100;
+                return "";
         }
 
+        public string RarityConvertion()
+        {
+            if (Convert.ToInt32(Rarity) == -1) 
+                return "?";
+            if (Convert.ToInt32(Rarity) == 1)
+                return "normal";
+            if (Convert.ToInt32(Rarity) == 2)
+                return "rare";
+            else
+                return "";
+        }
 
         private static readonly string BaseUrl = @"https://cdn.getslowly.com/assets/images/stamp-sm/";
         private static readonly string FileExtension = @".png";
         public string Url { get { return string.Format("{0}{1}{2}", BaseUrl, Slug, FileExtension); } }
+        public string StampName { get { return string.Format("{0}{1}", Slug, FileExtension); } }
+        #endregion
+        #region Data fields
         public int Id { get; set; }
         public string Slug { get; set; }
         public string Name { get; set; }
         public string Credit { get; set; }
         public string Type { get; set; }
-        // item_set_id
-        // item_group
+        public int? Item_set_id { get; set; }
+        public string Item_group { get; set; }    
         public string Rarity { get; set; }
         public string Price { get; set; }
         public string Desc { get; set; }
         public string Img { get; set; }
-
+        public double? Weight { get; set; }
         public string Country { get; set; }
-        public ItemSet Item_set { get; set; }
+        public Item_set Item_set { get; set; }
+        #endregion
     }
-    public class ItemSet
+    public class Item_set
     {
-        public int? id { get; set; }
-        public string updated_at { get; set; }
-
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Body { get; set; }
+        public string Image { get; set; }
+        public string Single_bg { get; set; }
+        public string Credit { get; set; }
+        public string Collection_type { get; set; }
+        public string Url { get; set; }
+        public string Starttime { get; set; }
+        public string Endtime { get; set; }
+        public int Discount { get; set; }
+        public int Items_count { get; set; }
+        public int Price { get; set; }
+        public int? Original_price { get; set; }
+        public int Status { get; set; }
+        public double? Weight { get; set; }
+        public int Rank { get; set; }
+        public string Updated_at { get; set; }
     }
 
     public class Tag
