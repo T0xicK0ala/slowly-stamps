@@ -16,9 +16,24 @@ namespace SlowlyStampCollection.Data
 {
     public class StampCollectionService
     {
-        private readonly string uri = @"https://api.getslowly.com/slowly";
+        private static readonly string uri = @"https://api.getslowly.com/slowly";
+        private static async Task GenerateData(string ver, string json)
+        {
+            string url = string.Format(@"Slowly\json{0}.json", ver);
+            try
+            {
+                if (!File.Exists(url))
+                {
+                    await File.WriteAllTextAsync(url, json);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        public Task<Item[]> GetStampAsync()
+        private static SlowlyData DeserielizeSlowlyData()
         {
             var options = new JsonSerializerOptions
             {
@@ -27,24 +42,32 @@ namespace SlowlyStampCollection.Data
             };
 
             using WebClient client = new WebClient();
-            var json = client.DownloadString(uri);
-            var deserielizedJson = JsonSerializer.Deserialize<SlowlyData>(json, options);
-            var jsonVersion = deserielizedJson.ver.ToString();
-            _ = GenerateData(jsonVersion, json);
-            return Task.FromResult(deserielizedJson.Items.OrderByDescending(i => i.id).ToArray());
+            var jsonStr = client.DownloadString(uri);
+            var deserielizedJson = JsonSerializer.Deserialize<SlowlyData>(jsonStr, options);
+            var jsonVersion = deserielizedJson.Ver.ToString();
+            _ = GenerateData(jsonVersion, jsonStr);
+            return deserielizedJson;
         }
 
-        private static async Task GenerateData(string ver, string json)
+        public Task<Item[]> GetStampAsync()
         {
-            string url = string.Format(@"Slowly\json{0}.json", ver);
+            return Task.FromResult(DeserielizeSlowlyData().Items.OrderByDescending(i => i.Id).ToArray());
+        }
+
+        public Task<Lang[]> GetLanguageAsync()
+        {
             try
             {
-                await File.WriteAllTextAsync(url, json);
+                return Task.FromResult(DeserielizeSlowlyData().Lang.OrderByDescending(l => l.Count).ToArray());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                throw ex;
             }
+            
+            
+            
         }
     }
 }

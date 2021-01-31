@@ -16,55 +16,6 @@
 }
 else
 {
-    <div>
-        <p>
-            Total: <strong>@stamps.Length</strong> stamps
-            <ul>
-                <!--<li>
-                    <strong>@stamps.Count(s => s.Category == 4)</strong> stamps in category Achievements
-                </li>
-                <li>
-                    <strong>@stamps.Count(s => s.Category == 1)</strong> stamps in category Single Stamp
-                </li>
-                <li>
-                    <strong>@stamps.Count(s => s.Category == 2)</strong> stamps in category Stamp Set
-                </li>
-                <li>-->
-                @*<strong>@stamps.Count(s => s.Category == 3)</strong> stamps in category Location Exclusive*@
-                <!--<strong>@stamps.Count(s => s.Region != "global")</strong> stamps in category Location Exclusive
-                </li>
-                <li>
-                    <strong>@stamps.Count(s => s.Category == 5)</strong> stamps in category Time Machine
-                </li>
-                <li>
-                    <strong>@stamps.Count(s => s.Category == 0)</strong> stamps in category Other
-                </li>-->
-            </ul>
-
-            @*Second paragraph
-                <ul>
-                    @for (int i = 0; i < 6; i++)
-                    {
-                        var stamp = @stamps.FirstOrDefault(s => s.Category == @i);
-                        if (stamp != null)
-                        {
-                            if (stamp.Category == 3)
-                            {
-                                <li>
-                                    <strong>@stamps.Count(s => s.Region != "global")</strong>
-                                    stamps in category @stamp.CategoryName
-                                </li>
-                            }
-                            else
-                            {
-                                <li><strong>@stamps.Count(s => s.Category == @i)</strong> stamps in category @stamp.CategoryName</li>
-                            }
-                        }
-                    }
-                </ul>*@
-        </p>
-        Search: <input type="text" name="search" value="" />
-    </div>
     <table class="table">
     </table>
     <table class="table">
@@ -85,17 +36,17 @@ else
             {
                 <tr>
                     <td>
-                        <a href="javascript:;" title="@stamp.slug">
-                            <img src="@stamp.Url" alt="@stamp.name" />
+                        <a href="javascript:;" title="@stamp.Slug">
+                            <img src="@stamp.Url" alt="@stamp.Name" />
                         </a>
                     </td>
                     <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
                     <td></td>
                     <td></td>
-                    <td style="width:15%">@stamp.credit</td>
-                    <td style="width:15%">@stamp.name</td>
-                    <td style="width:20%">@stamp.desc</td>
-                    <td><p style="color:red">@stamp.rarity</p></td>
+                    <td style="width:15%">@stamp.Credit</td>
+                    <td style="width:15%">@stamp.Name</td>
+                    <td style="width:20%">@stamp.Desc</td>
+                    <td><p style="color:red">@stamp.Rarity</p></td>
                 </tr>
             }
         </tbody>
