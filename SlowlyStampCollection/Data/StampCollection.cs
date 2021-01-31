@@ -58,8 +58,10 @@ namespace SlowlyStampCollection.Data
         }
 
         private static readonly string BaseUrl = @"https://cdn.getslowly.com/assets/images/stamp-sm/";
+        private static readonly string BaseUrlL = @"https://cdn.getslowly.com/assets/images/stamp/";
         private static readonly string FileExtension = @".png";
         public string Url { get { return string.Format("{0}{1}{2}", BaseUrl, Slug, FileExtension); } }
+        public string UrlL { get { return string.Format("{0}{1}{2}", BaseUrlL, Slug, FileExtension); } }
         public string StampName { get { return string.Format("{0}{1}", Slug, FileExtension); } }
         #endregion
         #region Data fields

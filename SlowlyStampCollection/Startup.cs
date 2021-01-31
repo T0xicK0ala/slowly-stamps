@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SlowlyStampCollection.Data;
+using Blazored.Modal;
 
 namespace SlowlyStampCollection
 {
@@ -20,9 +21,10 @@ namespace SlowlyStampCollection
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddBlazoredModal();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<StampCollectionService>();
+            services.AddSingleton<StampCollectionService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

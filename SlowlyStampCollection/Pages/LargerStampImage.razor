@@ -1,0 +1,11 @@
+﻿@page "/LargerStampImage"
+@using SlowlyStampCollection.Data
+
+<div>
+    <img src="@Stamp.UrlL" alt="@Stamp.StampName" style="width: 75%; height: 50%" />
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+    [Parameter] public Item Stamp { get; set; }
+}

@@ -15,8 +15,6 @@
 else
 {
     <table class="table">
-    </table>
-    <table class="table">
         <thead>
             <tr>
                 <th>Image</th>
@@ -34,7 +32,7 @@ else
                 <tr>
                     <td>
                         <a href="javascript:;" title="@stamp.Slug">
-                            <img src="@stamp.Url" alt="@stamp.StampName" onclick="DisplayStamp" />
+                            <img src="@stamp.Url" alt="@stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
                         </a>
                     </td>
                     <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
@@ -51,9 +49,17 @@ else
 
 @code {
     private SlowlyStampCollection.Data.Item[] stamps;
+    [CascadingParameter] public IModalService Modal { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         stamps = await StampService.GetStampAsync();
+    }
+
+    private void ShowLargerImage(Item stamp)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(LargerStampImage.Stamp), stamp);
+        Modal.Show<LargerStampImage>(stamp.Name, parameters);
     }
 }

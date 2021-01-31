@@ -8,4 +8,8 @@
     <Folder Include="Slowly\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="6.0.1" />
+  </ItemGroup>
+
 </Project>
