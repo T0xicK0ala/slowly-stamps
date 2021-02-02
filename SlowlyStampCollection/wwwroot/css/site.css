@@ -8,10 +8,56 @@ a, .btn-link {
     color: #0366d6;
 }
 
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #444;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: initial;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+}
+
+.btn-secondary {
+    color: #212529;
+    background-color: #ffc300;
+    border-color: #ffc300;
+}
+
+.btn.btn-reply {
+    position: sticky;
+    right: 30px;
+    bottom: 30px;
+    border-radius: 999px;
+    padding-left: 30px;
+    padding-right: 30px;
+    z-index: 1040;
+}
+
+.btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
 }
 
 .content {

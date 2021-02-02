@@ -341,5 +341,6 @@ healthchecksdb
 
 # Custom
 Slowly/
+Feedback/
 appsettings.*
 Properties/

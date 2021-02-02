@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Feedback\" />
     <Folder Include="Slowly\" />
   </ItemGroup>
 

@@ -6,6 +6,7 @@ using System.Text.Unicode;
 using System.Text.Encodings.Web;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace SlowlyStampCollection.Data
 {
@@ -53,12 +54,47 @@ namespace SlowlyStampCollection.Data
 
         public Task<Item[]> GetStampAsync()
         {
-            return Task.FromResult(DeserielizeSlowlyData().Items.OrderByDescending(i => i.Id).ToArray());
+            return Task.FromResult(DeserielizeSlowlyData().Items.Where(i => i.Item_group != "placeholder").OrderByDescending(i => i.Id).ToArray());
         }
 
         public Task<Lang[]> GetLanguageAsync()
         {
             return Task.FromResult(DeserielizeSlowlyData().Lang.OrderByDescending(l => l.Count).ToArray());
+        }
+
+        public async Task SaveFeedback(Feedback feedback)
+        {
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            string file = string.Format(@"Feedback\feedback_{0}.txt", timestamp);
+            string content = FeedbackContentBuilder(timestamp, feedback);
+            try
+            {
+                if (!File.Exists(file))
+                {
+                    await File.WriteAllTextAsync(file, content);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static string FeedbackContentBuilder(string timestamp, Feedback feedback)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Feedback received at ");
+            sb.Append(timestamp);
+            sb.AppendLine();
+            sb.AppendLine();
+            sb.Append(feedback.Content);
+            sb.AppendLine();
+            sb.AppendLine();
+            sb.Append("Name: ");
+            sb.Append(feedback.Name);
+            sb.AppendLine();
+            sb.Append("---EOF---");
+            return sb.ToString();
         }
     }
 }

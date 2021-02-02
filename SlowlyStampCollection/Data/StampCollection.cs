@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SlowlyStampCollection.Data
 {
@@ -13,7 +14,6 @@ namespace SlowlyStampCollection.Data
         public int Sharequota { get; set; }
         public int Sharequotareset { get; set; }
     }
-
     public class Lang
     {
         public int Id { get; set; }
@@ -23,7 +23,6 @@ namespace SlowlyStampCollection.Data
         public int Weight { get; set; }
         public int Count { get; set; }
     }
-
     public class Item
     {
         #region Customised fields
@@ -102,7 +101,6 @@ namespace SlowlyStampCollection.Data
         public int Rank { get; set; }
         public string Updated_at { get; set; }
     }
-
     public class Tag
     {
         public int Id { get; set; }
@@ -110,6 +108,14 @@ namespace SlowlyStampCollection.Data
         public string Name { get; set; }
         public int Suggest { get; set; }
     }
+
+    #region Other models
+    public class Feedback
+    {
+        public string Content { get; set; }
+        public string Name { get; set; }
+    }
+    #endregion
 
     #region Retired class
     //public class Stamp

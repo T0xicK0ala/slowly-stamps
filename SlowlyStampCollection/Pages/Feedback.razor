@@ -1,6 +1,45 @@
 ﻿@page "/feedback"
+@using SlowlyStampCollection.Data
+@inject StampCollectionService StampService
+
 <h1>Feedback</h1>
+<hr>
+<div>
+    <p>What do you want me to improve this wiki website?</p>
+    <div>
+        <EditForm Model="@feedback" OnValidSubmit="@HandleValidSubmit">
+            <div class="form-group row">
+                <InputTextArea rows="5" cols="50" style="width: 500px" @bind-Value="@feedback.Content"></InputTextArea><br>
+            </div>
+            <div class="form-group row">
+                <InputText placeholder="Let me know your name or leave blank" style="width: 500px" @bind-Value="@feedback.Name" maxlength="20" />
+            </div>
+            <div class="form-group row">
+                @if (IsShow)
+                {
+                    <p style="color: red;">I am grateful for your effort.</p>
+                }
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-secondary btn-lg btn-reply shadow-lg">
+                    <i styles="font-weight: 400;">&#9996; Tell me</i>
+                </button>
+            </div>
+        </EditForm>
+    </div>
+</div>
 
 @code {
-
+    private bool IsShow = false;
+    private SlowlyStampCollection.Data.Feedback feedback = new Data.Feedback();
+    private async void HandleValidSubmit()
+    {
+        if (!string.IsNullOrWhiteSpace(feedback.Content))
+        {
+            await StampService.SaveFeedback(feedback);
+            feedback.Content = string.Empty;
+            feedback.Name = string.Empty;
+            IsShow = true;
+        }
+    }
 }
