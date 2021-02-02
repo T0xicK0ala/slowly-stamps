@@ -10,41 +10,41 @@
 </div>
 @if (stamps == null)
 {
-    <p><em>Getting there...</em></p>
+<p><em>Getting there...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Region</th>
-                <th>Group</th>
-                <th>Rarity</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var stamp in stamps)
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Group</th>
+            <th>Region</th>
+            <th>Rarity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stamp in stamps)
             {
-                <tr>
-                    <td>
-                        <a href="javascript:;" title="@stamp.Slug">
-                            <img src="@stamp.Url" alt="@stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
-                        </a>
-                    </td>
-                    <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
-                    <td style="width:15%">@stamp.Name</td>
-                    <td style="width:20%">@stamp.Desc</td>
-                    <td style="width:10%">@stamp.Country</td>
-                    <td style="width:15%">@stamp.Item_group</td>
-                    <td style="width:10%">@stamp.RarityConvertion()</td>
-                </tr>
+        <tr>
+            <td>
+                <a href="javascript:;" title="@stamp.Slug">
+                    <img src="@stamp.Url" alt="@stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
+                </a>
+            </td>
+            <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
+            <td style="width:15%">@stamp.Name</td>
+            <td style="width:20%">@stamp.Desc</td>
+            <td style="width:15%">@stamp.Item_group</td>
+            <td style="width:10%">@stamp.Country</td>
+            <td style="width:10%">@stamp.RarityConvertion()</td>
+        </tr>
             }
-        </tbody>
-    </table>
+    </tbody>
+</table>
 }
 
 @code {
