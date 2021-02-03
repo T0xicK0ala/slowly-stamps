@@ -8,13 +8,7 @@
     <p>All the information you want and need to know about collecting stamps on SLOWLY.</p>
     <p>Total <strong>@stamps.Length</strong> stamps</p>
 </div>
-@if (stamps == null)
-{
-<p><em>Getting there...</em></p>
-}
-else
-{
-<table class="table">
+<table class="table" id="stampTable">
     <thead>
         <tr>
             <th>Image</th>
@@ -26,26 +20,27 @@ else
             <th>Rarity</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var stamp in stamps)
-            {
-        <tr>
-            <td>
-                <a href="javascript:;" title="@stamp.Slug">
-                    <img src="@stamp.Url" alt="@stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
-                </a>
-            </td>
-            <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
-            <td style="width:15%">@stamp.Name</td>
-            <td style="width:20%">@stamp.Desc</td>
-            <td style="width:15%">@stamp.Item_group</td>
-            <td style="width:10%">@stamp.Country</td>
-            <td style="width:10%">@stamp.RarityConvertion()</td>
-        </tr>
-            }
-    </tbody>
+    <Virtualize ItemsProvider="LoadStamps" Context="stamp" ItemSize="10">
+        <ItemContent>
+            <tr>
+                <td>
+                    <a href="javascript:;" title="stamp.Slug">
+                        <img src="@stamp.Url" alt="stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
+                    </a>
+                </td>
+                <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>
+                <td style="width:15%">@stamp.Name</td>
+                <td style="width:20%">@stamp.Desc</td>
+                <td style="width:15%">@stamp.Item_group</td>
+                <td style="width:10%">@stamp.Country</td>
+                <td style="width:10%">@stamp.RarityConvertion()</td>
+            </tr>
+        </ItemContent>
+        <Placeholder>
+            <p><em>Getting there...</em></p>
+        </Placeholder>
+    </Virtualize>
 </table>
-}
 
 @code {
     private SlowlyStampCollection.Data.Item[] stamps;
@@ -54,6 +49,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         stamps = await StampService.GetStampAsync();
+    }
+
+    protected async ValueTask<ItemsProviderResult<Item>> LoadStamps(ItemsProviderRequest request)
+    {
+        return new ItemsProviderResult<Item>(stamps.Skip(request.StartIndex).Take(request.Count), stamps.Count());
     }
 
     private void ShowLargerImage(Item stamp)
