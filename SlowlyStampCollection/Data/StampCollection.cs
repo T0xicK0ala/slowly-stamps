@@ -115,6 +115,13 @@ namespace SlowlyStampCollection.Data
         public string Content { get; set; }
         public string Name { get; set; }
     }
+
+    public class NewStampInfo
+    {
+        public int Id { get; set; }
+        public string Date { get; set; }
+        public string Item { get; set; }
+    }
     #endregion
 
     #region Retired class

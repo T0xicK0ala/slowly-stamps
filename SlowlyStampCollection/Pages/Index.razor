@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using SlowlyStampCollection.Data
+@inject StampCollectionService StampService
+
 <div>
     <h1>SLOWLY Stamps - Beta</h1><hr>
     <p>Welcome to this wiki website.</p>
@@ -15,9 +18,23 @@
 <div>
     <hr><h3>Slowly Stamp Release Information</h3>
     <ul>
-        <li>2021/02/03 - Add a new translator stamp "Danish"</li>
-        <li>2021/02/02 - Add 13 new stamps "International Polar Bear Day", "Happy Mother’s Day", "Year of the Ox", "Lovebirds", "Flag of the Dominican Republic", "Flag of Kuwait", "Flag of Estonia", "Flag of Brunei", "Flag of Japan", "Flag of Gambia", "Flag of Serbia", "Flag of Canada", "Flag of Iran"</li>
-        <li>2021/01/30 - Add stamps "Poutine", "Hockey", "Groundhog Day"</li>
+        @if (infoset == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            @foreach (var info in infoset)
+            {
+                var l = info.Item.Split(',').Length;
+                string s = "";
+                @if (l > 1)
+                    s = "stamps";
+                else
+                    s = "stamp";
+                <li>@info.Date - Add @l new @s: "@info.Item"</li>
+            }
+        }
     </ul>
     <hr>
     <div><strong>Older: </strong> <a href="https://slowly.fandom.com/wiki/List_of_stamps_on_Slowly">Fandom Wiki</a>.</div>
@@ -156,3 +173,11 @@
         <li>2020/04/22 - Add stamps "Lucha Libre Mexicana", "มวยไทย"</li>
     </ul>
 </div>
+
+@code{
+    private NewStampInfo[] infoset;
+    protected override async Task OnInitializedAsync()
+    {
+        infoset = await StampService.GetStampInfoAsync();
+    }
+}

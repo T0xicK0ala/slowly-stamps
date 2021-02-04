@@ -96,5 +96,15 @@ namespace SlowlyStampCollection.Data
             sb.Append("---EOF---");
             return sb.ToString();
         }
+
+        public Task<NewStampInfo[]> GetStampInfoAsync()
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+            };
+            return Task.FromResult(JsonSerializer.Deserialize<NewStampInfo[]>(File.ReadAllText(@"Data\new.json"), options).OrderByDescending(i => i.Id).ToArray());
+        }
     }
 }
