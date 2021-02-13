@@ -24,8 +24,8 @@
         <ItemContent>
             <tr>
                 <td>
-                    <a href="javascript:;" title="stamp.Slug">
-                        <img src="@stamp.Url" alt="stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
+                    <a href="javascript:;" title="@stamp.Slug">
+                        <img src="@stamp.Url" alt="@stamp.StampName" @onclick="@(() => ShowLargerImage(@stamp))" />
                     </a>
                 </td>
                 <td><img src="https://web.getslowly.com/static/media/coin.a380d373.png" height="16" alt="SLOWLY_COINS" />&nbsp;@stamp.PriceCal()</td>

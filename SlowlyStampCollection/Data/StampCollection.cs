@@ -33,7 +33,7 @@ namespace SlowlyStampCollection.Data
             if (Convert.ToInt32(Price) == 0) // cannot buy
                 return "n/a";
             if (Convert.ToInt32(Price) == 1) // set
-                return "100";
+                return "16.67";
             if (Convert.ToInt32(Price) == 2) { // other
                 if (Item_set == null)
                     return "50";
